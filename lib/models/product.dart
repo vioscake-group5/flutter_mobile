@@ -1,28 +1,31 @@
 class Product {
-  final String imageUrl;
   final String name;
   final String description;
-  final double price;
+  final int price;
+  final String image;
+  bool isSelected;
 
   Product({
-    required this.imageUrl,
     required this.name,
     required this.description,
     required this.price,
+    required this.image,
+    this.isSelected = false,
   });
 }
 
-final List<Product> products = [
+List<Product> products = [
   Product(
-    imageUrl: 'assets/logo.png',
-    name: 'Product 1',
-    description: 'This is the description for product 1.',
-    price: 10.0,
+    name: 'Produk 1',
+    description: 'Deskripsi Produk 1',
+    price: 10000,
+    image: 'https://via.placeholder.com/150',
   ),
   Product(
-    imageUrl: 'assets/logo.png',
-    name: 'Product 2',
-    description: 'This is the description for product 2.',
-    price: 20.0,
+    name: 'Produk 2',
+    description: 'Deskripsi Produk 2',
+    price: 20000,
+    image: 'https://via.placeholder.com/150',
   ),
+  // Add more products here
 ];

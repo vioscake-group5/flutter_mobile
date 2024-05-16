@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:vioscake_admin/models/product.dart';
+import 'package:vioscake_admin/pages/keranjang_page.dart';
 import './dashboard_page.dart';
 import './menu_page.dart';
-import './keranjang_page.dart';
 import './setting_page.dart';
 
 class LandingPage extends StatefulWidget {
@@ -11,12 +12,24 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   int _selectedIndex = 0;
-  List<Widget> _container = [
-    new DashboardPage(),
-    new MenuPage(),
-    new KeranjangPage(),
-    new SettingPage(),
-  ];
+  List<Product> keranjangItems = [];
+
+  void tambahKeKeranjang(Product product) {
+    setState(() {
+      keranjangItems.add(product);
+    });
+  }
+
+  List<Widget> _getContainer() {
+    return [
+      new DashboardPage(),
+      new MenuPage(
+        onAddToCart: (product) => tambahKeKeranjang(product),
+      ),
+      new KeranjangPage(keranjangItems: keranjangItems),
+      new SettingPage(),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -28,7 +41,7 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _container.elementAt(_selectedIndex),
+        child: _getContainer().elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
