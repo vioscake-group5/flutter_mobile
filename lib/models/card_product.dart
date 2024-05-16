@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'product.dart'; // Pastikan ini adalah path yang benar untuk model Product
+import 'product.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;

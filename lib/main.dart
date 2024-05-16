@@ -16,28 +16,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// @override
-// Widget build(BuildContext context) {
-//   return Scaffold(
-//     body: SingleChildScrollView(
-//       child: Container(
-//         color: Color(0xFFEFD7AE),
-//         width: 428,
-//         height: 926,
-//         child: Center(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               Image.asset(
-//                 'assets/logo.png',
-//                 width: 300,
-//                 height: 295,
-//               )
-//             ],
-//           ),
-//         ),
-//       ),
-//     ),
-//   );
-// }

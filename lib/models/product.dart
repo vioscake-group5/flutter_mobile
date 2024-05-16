@@ -25,5 +25,4 @@ final List<Product> products = [
     description: 'This is the description for product 2.',
     price: 20.0,
   ),
-  // Tambahkan produk lainnya di sini
 ];

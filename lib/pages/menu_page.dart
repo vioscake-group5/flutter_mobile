@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vioscake_admin/model/card_product.dart';
-import 'package:vioscake_admin/model/product.dart';
+import 'package:vioscake_admin/models/card_product.dart';
+import 'package:vioscake_admin/models/product.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({Key? key}) : super(key: key);
