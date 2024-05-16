@@ -33,20 +33,25 @@ class _LandingPageState extends State<LandingPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: ImageIcon(AssetImage("assets/icon/home.png")),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: ImageIcon(AssetImage("assets/icon/menu.png")),
+            label: 'Menu',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: ImageIcon(AssetImage("assets/icon/keranjang.png")),
+            label: 'Keranjang',
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage("assets/icon/setting.png")),
+            label: 'Pengaturan',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Color(0xFFDEAE78),
+        unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),
     );

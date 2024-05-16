@@ -7,13 +7,13 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Setting'),
+        title: Text('Pengaturan'),
         backgroundColor: Color(0xFFEFD7AE),
         automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Text(
-          'Ini adalah halaman setting',
+          'Ini adalah halaman pengaturan',
           style: TextStyle(fontSize: 20.0),
         ),
       ),
