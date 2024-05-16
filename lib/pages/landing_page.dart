@@ -27,31 +27,27 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEFD7AE),
-      body: _container[_selectedIndex],
-      bottomNavigationBar: new BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        currentIndex: _selectedIndex,
-        items: [
+      body: Center(
+        child: _container.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            activeIcon: new Icon(
-              Icon.home,
-              color: Colors.amber,
-            ),
-            icon: new Icon(
-              Icon.home,
-              color: Colors.grey,
-            ),
-            title: new Text('Beranda',
-                style: TextStyle(
-                    color: _selectedIndex == 0 ? Colors.amber : Colors.grey)),
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'Business',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'School',
           ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
   }

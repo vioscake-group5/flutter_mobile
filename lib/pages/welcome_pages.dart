@@ -3,33 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:vioscake_admin/pages/register_page.dart';
 import 'package:vioscake_admin/shared/shared.dart';
 import 'login_page.dart';
-import './dashboard_page.dart';
-import './menu_page.dart';
-import './keranjang_page.dart';
-import './setting_page.dart';
 
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key? key}) : super(key: key);
-
-  @override
-  _WelcomePageState createState() => _WelcomePageState();
-}
-
-class _WelcomePageState extends State<WelcomePage> {
-  int _selectedIndex = 0;
-
-  static List<Widget> _widgetOptions = <Widget>[
-    DashboardPage(),
-    MenuPage(),
-    KeranjangPage(),
-    SettingPage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +29,7 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             Container(
               margin: EdgeInsets.only(top: 51),
+              // Atur margin vertikal sebesar 15
               child: Image.asset(
                 'assets/logo.png',
                 height: 250,
@@ -73,7 +50,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Color(0xFF6B5048)),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(251, 51)),
+                  minimumSize: MaterialStateProperty.all<Size>(
+                      Size(251, 51)), // Atur panjang dan tinggi tombol
                 ),
                 child: Text(
                   'Sign up',
@@ -104,29 +82,6 @@ class _WelcomePageState extends State<WelcomePage> {
             SizedBox(height: 10)
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu),
-            label: 'Menu',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Keranjang',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Setting',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
       ),
     );
   }

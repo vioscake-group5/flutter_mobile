@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vioscake_admin/shared/shared.dart';
 
 class MyApp extends StatelessWidget {
   @override
