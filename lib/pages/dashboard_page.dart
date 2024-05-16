@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'chat_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -35,10 +36,18 @@ class DashboardPage extends StatelessWidget {
                 ),
                 Stack(
                   children: [
-                    CircleAvatar(
-                      radius: 24,
-                      backgroundColor: Colors.grey.shade300,
-                      child: Icon(Icons.chat_bubble_outline),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ChatPage()),
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 24,
+                        backgroundColor: Colors.grey.shade300,
+                        child: Icon(Icons.chat_bubble_outline),
+                      ),
                     ),
                     Positioned(
                       right: 0,
