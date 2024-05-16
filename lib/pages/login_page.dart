@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:vioscake_admin/pages/forgot_password.dart';
 import 'package:vioscake_admin/pages/landing_page.dart';
 import 'package:vioscake_admin/pages/register_page.dart';
@@ -9,6 +10,45 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // text controller
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+
+    Future<void> login(BuildContext context, String email, String password) async {
+      final response = await http.post(
+        Uri.parse('https://dbvios.000webhostapp.com/api/login.php'),
+        body: {
+          'email': email,
+          'password': password,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LandingPage()),
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Failed to login. Please try again.'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
+
     return Scaffold(
       backgroundColor: Color(0xFFEFD7AE),
       appBar: AppBar(
@@ -72,6 +112,7 @@ class LoginPage extends StatelessWidget {
                     horizontal: 10.0,
                   ), // Atur padding sesuai kebutuhan Anda
                   child: TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(
@@ -87,6 +128,7 @@ class LoginPage extends StatelessWidget {
                     horizontal: 10.0,
                   ),
                   child: TextField(
+                    controller: passwordController,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(
@@ -123,16 +165,17 @@ class LoginPage extends StatelessWidget {
                   margin: EdgeInsets.only(top: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LandingPage()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => LandingPage()),
+                      // );
+                      login(context, emailController.text, passwordController.text);
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
+                      backgroundColor: WidgetStateProperty.all<Color>(
                         Color(0xFF6B5048),
                       ),
-                      minimumSize: MaterialStateProperty.all<Size>(
+                      minimumSize: WidgetStateProperty.all<Size>(
                         Size(251, 51),
                       ),
                     ),
