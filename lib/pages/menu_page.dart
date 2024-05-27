@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vioscake_admin/models/card_product.dart';
 import 'package:vioscake_admin/models/product.dart';
-import 'package:vioscake_admin/pages/keranjang_page.dart';
 
 class MenuPage extends StatelessWidget {
   final Function(Product) onAddToCart;

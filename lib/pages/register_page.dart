@@ -123,10 +123,10 @@ class SignUpPage extends StatelessWidget {
                         );
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
+                        backgroundColor: WidgetStateProperty.all<Color>(
                           Color(0xFF6B5048),
                         ),
-                        minimumSize: MaterialStateProperty.all<Size>(
+                        minimumSize: WidgetStateProperty.all<Size>(
                           Size(251, 51),
                         ),
                       ),
