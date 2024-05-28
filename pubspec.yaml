@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  shared_preferences: ^2.2.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -39,6 +39,7 @@ dependencies:
   rflutter_alert: ^2.0.7
   http: ^1.2.1
   progress_dialog_null_safe: ^3.0.0
+  image_picker: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +80,7 @@ flutter:
     - assets/icon/keranjang.png
     - assets/icon/setting.png
     - assets/icon/chat.png
+    - assets/icon/daftar_transaksi.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

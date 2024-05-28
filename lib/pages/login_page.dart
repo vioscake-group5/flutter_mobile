@@ -4,6 +4,7 @@ import 'package:vioscake_admin/pages/forgot_password.dart';
 import 'package:vioscake_admin/pages/landing_page.dart';
 import 'package:vioscake_admin/pages/register_page.dart';
 import 'package:vioscake_admin/shared/shared.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
@@ -135,11 +136,11 @@ class _LoginPageState extends State<LoginPage> {
                   margin: EdgeInsets.only(top: 20),
                   child: ElevatedButton(
                     onPressed: () {
-                      // this._doLogin();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LandingPage()),
-                      );
+                      this._doLogin();
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => LandingPage()),
+                      // );
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -186,14 +187,43 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future _doLogin() async {
+    String correctEmail = "gilang@gmail.com";
+    String correctPassword = "user12345";
+
     if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
-      Alert(
-              context: context,
-              title: "Email atau password salah!",
-              type: AlertType.error)
-          .show();
-      return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Email dan password tidak boleh kosong",
+              style: TextStyle(color: whiteColor)),
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else if (txtEmail.text != correctEmail ||
+        txtPassword.text != correctPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Email atau password salah!",
+              style: TextStyle(color: whiteColor)),
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else if (txtEmail.text == correctEmail ||
+        txtPassword.text == correctPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Berhasil Login", style: TextStyle(color: whiteColor)),
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.green,
+        ),
+      );
     }
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', true);
+
+    Navigator.pushReplacementNamed(context, '/landing_page');
     // final response = await http.post('http://demo-api.unama.ac.id/api/login',
     //     body: {'email': txtEmail.text, 'password': txtPassword.text},
     //     headers: {'Accept': 'application/json'});
