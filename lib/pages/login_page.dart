@@ -5,22 +5,63 @@ import 'package:vioscake_admin/pages/register_page.dart';
 import 'package:vioscake_admin/shared/shared.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:rflutter_alert/rflutter_alert.dart';
+// import 'package:rflutter_alert/rflutter_alert.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
   
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
+//   @override
+//   _LoginPageState createState() => _LoginPageState();
+// }
 
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController txtEmail = TextEditingController();
-  final TextEditingController txtPassword = TextEditingController();
+// class _LoginPageState extends State<LoginPage> {
+//   final TextEditingController txtEmail = TextEditingController();
+//   final TextEditingController txtPassword = TextEditingController();
 
 
   @override
   Widget build(BuildContext context) {
+
+    // text controller
+    TextEditingController txtEmail = TextEditingController();
+    TextEditingController txtPassword = TextEditingController();
+
+    // make login
+    Future<void> login(BuildContext context, String email, String password) async {
+      final response = await http.post(
+        Uri.parse('http/192.168.1.5:8000/api/login2'), // ganti make url API serah
+        body: {
+          'email': email,
+          'password': password,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LandingPage()),
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Failed to login. Please try again.'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
+
     return Scaffold(
       backgroundColor: Color(0xFFEFD7AE),
       appBar: AppBar(
@@ -138,10 +179,11 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton(
                     // this._doLogin();
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LandingPage()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => LandingPage()),
+                      // );
+                      login(context, txtEmail.text, txtPassword.text);
                     },
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all<Color>(
@@ -187,15 +229,15 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future _doLogin() async {
-    if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
-      Alert(
-              context: context,
-              title: "Email atau password salah!",
-              type: AlertType.error)
-          .show();
-      return;
-    }
+  // Future _doLogin() async {
+  //   if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
+  //     Alert(
+  //             context: context,
+  //             title: "Email atau password salah!",
+  //             type: AlertType.error)
+  //         .show();
+  //     return;
+  //   }
     // final response = await http.post('http://demo-api.unama.ac.id/api/login',
     //     body: {'email': txtEmail.text, 'password': txtPassword.text},
     //     headers: {'Accept': 'application/json'});
@@ -205,5 +247,5 @@ class _LoginPageState extends State<LoginPage> {
     // } else {
     //   Alert(context: context, title: "Login Gagal", type: AlertType.error)
     //       .show();
-  }
+  // }
 }
