@@ -20,6 +20,10 @@ dependencies:
   connectivity_plus: ^5.0.2
 
   cupertino_icons: ^1.0.6
+  firebase_auth: ^4.19.5
+  rflutter_alert: ^2.0.7
+  http: ^1.2.1
+  progress_dialog_null_safe: ^3.0.0
 
 dev_dependencies:
   flutter_test:
