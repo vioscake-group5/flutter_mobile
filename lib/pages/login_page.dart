@@ -5,19 +5,9 @@ import 'package:vioscake_admin/pages/register_page.dart';
 import 'package:vioscake_admin/shared/shared.dart';
 
 import 'package:http/http.dart' as http;
-// import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
-  
-//   @override
-//   _LoginPageState createState() => _LoginPageState();
-// }
-
-// class _LoginPageState extends State<LoginPage> {
-//   final TextEditingController txtEmail = TextEditingController();
-//   final TextEditingController txtPassword = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +19,7 @@ class LoginPage extends StatelessWidget {
     // make login
     Future<void> login(BuildContext context, String email, String password) async {
       final response = await http.post(
-        Uri.parse('http/192.168.1.5:8000/api/login2'), // ganti make url API serah
+        Uri.parse('http://192.168.1.5:8000/api/login2'), // ganti make url API serah
         body: {
           'email': email,
           'password': password,
@@ -204,14 +194,14 @@ class LoginPage extends StatelessWidget {
                   margin: EdgeInsets.only(right: 5.0),
                   child: TextButton(
                     onPressed: () {
-                      // Tambahkan navigasi ke halaman ForgotPassword di sini
+                      // navigate ke halaman ForgotPassword di sini
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => SignUpPage()),
                       );
                     },
                     child: Text(
-                      'Dont have an account? Sign up',
+                      'Don`t have an account? Sign up',
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         decoration: TextDecoration.underline,
@@ -228,24 +218,4 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-
-  // Future _doLogin() async {
-  //   if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
-  //     Alert(
-  //             context: context,
-  //             title: "Email atau password salah!",
-  //             type: AlertType.error)
-  //         .show();
-  //     return;
-  //   }
-    // final response = await http.post('http://demo-api.unama.ac.id/api/login',
-    //     body: {'email': txtEmail.text, 'password': txtPassword.text},
-    //     headers: {'Accept': 'application/json'});
-    // if (response.statusCode == 200) {
-    //   Alert(context: context, title: "Login Berhasil", type: AlertType.success)
-    //       .show();
-    // } else {
-    //   Alert(context: context, title: "Login Gagal", type: AlertType.error)
-    //       .show();
-  // }
 }
