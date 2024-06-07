@@ -16,15 +16,21 @@ class Product {
 
 List<Product> products = [
   Product(
-    name: 'Produk 1',
+    name: 'Red Valvet Cake',
     description: 'Deskripsi Produk 1',
     price: 10000,
     image: 'https://via.placeholder.com/150',
   ),
   Product(
-    name: 'Produk 2',
+    name: 'Matcha Cake',
     description: 'Deskripsi Produk 2',
     price: 20000,
+    image: 'https://via.placeholder.com/150',
+  ),
+  Product(
+    name: 'Black Forest Cake',
+    description: 'Deskripsi Produk 3',
+    price: 35000,
     image: 'https://via.placeholder.com/150',
   ),
   // Add more products here

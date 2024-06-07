@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:vioscake_admin/pages/register_page.dart';
 import 'package:vioscake_admin/shared/shared.dart';
 import 'login_page.dart';
@@ -49,8 +48,8 @@ class WelcomePage extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   backgroundColor:
-                      MaterialStateProperty.all<Color>(Color(0xFF6B5048)),
-                  minimumSize: MaterialStateProperty.all<Size>(
+                      WidgetStateProperty.all<Color>(Color(0xFF6B5048)),
+                  minimumSize: WidgetStateProperty.all<Size>(
                       Size(251, 51)), // Atur panjang dan tinggi tombol
                 ),
                 child: Text(

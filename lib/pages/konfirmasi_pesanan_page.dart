@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
 import 'package:vioscake_admin/models/product.dart';
+import 'package:vioscake_admin/shared/shared.dart';
 
 class KonfirmasiPesananPage extends StatefulWidget {
   final Product selectedProduct;
+  final Function(Product) onAddToCart;
 
-  const KonfirmasiPesananPage({Key? key, required this.selectedProduct})
-      : super(key: key);
+  const KonfirmasiPesananPage({
+    Key? key,
+    required this.selectedProduct,
+    required this.onAddToCart,
+  }) : super(key: key);
 
   @override
   _KonfirmasiPesananPageState createState() => _KonfirmasiPesananPageState();
@@ -24,6 +28,8 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
   File? imageFile;
   double estimatedPrice = 45000.0;
   String deliveryAddress = 'Jl. Samanhudi / III No. 51';
+  int? selectedDesignIndex;
+  bool isDesignSelectable = true;
 
   @override
   void initState() {
@@ -45,12 +51,45 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
     if (pickedFile != null) {
       setState(() {
         imageFile = File(pickedFile.path);
+        isDesignSelectable = false; // Disable design selection
+        selectedDesignIndex = null; // Reset design selection
       });
     }
   }
 
+  void _removeImage() {
+    setState(() {
+      imageFile = null;
+      isDesignSelectable = true; // Enable design selection
+    });
+  }
+
+  void _previewImage() {
+    if (imageFile != null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.file(imageFile!),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Close'),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
+  }
+
   void _addToCart() {
-    // Add to cart logic here
+    widget.onAddToCart(widget.selectedProduct);
     Navigator.pushReplacementNamed(context, '/keranjang');
   }
 
@@ -118,9 +157,27 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
                 ),
                 itemCount: 6,
                 itemBuilder: (context, index) {
-                  return Container(
-                    color: Colors.grey[300],
-                    child: Center(child: Text('Desain ${index + 1}')),
+                  return GestureDetector(
+                    onTap: isDesignSelectable
+                        ? () {
+                            setState(() {
+                              selectedDesignIndex = index;
+                            });
+                          }
+                        : null,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: selectedDesignIndex == index
+                            ? Colors.blue
+                            : Colors.grey[300],
+                        border: selectedDesignIndex == index
+                            ? Border.all(color: Colors.blue, width: 2)
+                            : null,
+                      ),
+                      child: Center(
+                        child: Text('Desain ${index + 1}'),
+                      ),
+                    ),
                   );
                 },
               ),
@@ -164,7 +221,7 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
                 maxLines: 5,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Menulis...',
+                  hintText: 'Ketik pesan...',
                 ),
               ),
               SizedBox(height: 16),
@@ -173,7 +230,7 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
               Row(
                 children: [
                   InkWell(
-                    onTap: _pickImage,
+                    onTap: imageFile == null ? _pickImage : _previewImage,
                     child: Container(
                       width: 100,
                       height: 100,
@@ -183,6 +240,11 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
                           : Image.file(imageFile!, fit: BoxFit.cover),
                     ),
                   ),
+                  if (imageFile != null)
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: _removeImage,
+                    ),
                   // Add more image slots if necessary
                 ],
               ),
@@ -206,18 +268,32 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
+                  OutlinedButton(
                     onPressed: _addToCart,
-                    child: Text('Keranjang'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
+                    child: Text(
+                      '+ Keranjang',
+                      style: TextStyle(color: Color(0xFFDEAE78)),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(width: 2, color: Color(0xFFDEAE78)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7),
+                      ),
+                      minimumSize: Size(170, 40),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: _placeOrder,
-                    child: Text('Bayar'),
+                    child: Text(
+                      'Bayar',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Color(0xFFDEAE78),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(7),
+                      ),
+                      minimumSize: Size(170, 40),
                     ),
                   ),
                 ],

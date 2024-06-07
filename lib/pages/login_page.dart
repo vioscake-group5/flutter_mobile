@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:vioscake_admin/pages/forgot_password.dart';
 import 'package:vioscake_admin/pages/landing_page.dart';
 import 'package:vioscake_admin/pages/register_page.dart';
@@ -7,16 +6,8 @@ import 'package:vioscake_admin/shared/shared.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController txtEmail = TextEditingController();
-  final TextEditingController txtPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -135,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   margin: EdgeInsets.only(top: 20),
                   child: ElevatedButton(
+                    // this._doLogin();
                     onPressed: () {
                       this._doLogin();
                       // Navigator.push(
@@ -143,10 +135,10 @@ class _LoginPageState extends State<LoginPage> {
                       // );
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
+                      backgroundColor: WidgetStateProperty.all<Color>(
                         Color(0xFF6B5048),
                       ),
-                      minimumSize: MaterialStateProperty.all<Size>(
+                      minimumSize: WidgetStateProperty.all<Size>(
                         Size(251, 51),
                       ),
                     ),
@@ -161,14 +153,14 @@ class _LoginPageState extends State<LoginPage> {
                   margin: EdgeInsets.only(right: 5.0),
                   child: TextButton(
                     onPressed: () {
-                      // Tambahkan navigasi ke halaman ForgotPassword di sini
+                      // navigate ke halaman ForgotPassword di sini
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => SignUpPage()),
                       );
                     },
                     child: Text(
-                      'Dont have an account? Sign up',
+                      'Don`t have an account? Sign up',
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         decoration: TextDecoration.underline,
@@ -186,53 +178,25 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future _doLogin() async {
-    String correctEmail = "gilang@gmail.com";
-    String correctPassword = "user12345";
-
-    if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Email dan password tidak boleh kosong",
-              style: TextStyle(color: whiteColor)),
-          duration: Duration(seconds: 2),
-          backgroundColor: Colors.red,
-        ),
-      );
-    } else if (txtEmail.text != correctEmail ||
-        txtPassword.text != correctPassword) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Email atau password salah!",
-              style: TextStyle(color: whiteColor)),
-          duration: Duration(seconds: 2),
-          backgroundColor: Colors.red,
-        ),
-      );
-    } else if (txtEmail.text == correctEmail ||
-        txtPassword.text == correctPassword) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Berhasil Login", style: TextStyle(color: whiteColor)),
-          duration: Duration(seconds: 2),
-          backgroundColor: Colors.green,
-        ),
-      );
-    }
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isLoggedIn', true);
-
-    Navigator.pushReplacementNamed(context, '/landing_page');
-    // final response = await http.post('http://demo-api.unama.ac.id/api/login',
-    //     body: {'email': txtEmail.text, 'password': txtPassword.text},
-    //     headers: {'Accept': 'application/json'});
-    // if (response.statusCode == 200) {
-    //   Alert(context: context, title: "Login Berhasil", type: AlertType.success)
-    //       .show();
-    // } else {
-    //   Alert(context: context, title: "Login Gagal", type: AlertType.error)
-    //       .show();
-    // }
-  }
+  // Future _doLogin() async {
+  //   if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
+  //     Alert(
+  //             context: context,
+  //             title: "Email atau password salah!",
+  //             type: AlertType.error)
+  //         .show();
+  //     return;
+  // }
+  // final response = await http.post('https://vioscake.my.id/',
+  //     body: {'email': txtEmail.text, 'password': txtPassword.text},
+  //     headers: {'Accept': 'application/json'});
+  // if (response.statusCode == 200) {
+  //   Alert(context: context, title: "Login Berhasil", type: AlertType.success)
+  //       .show();
+  // } else {
+  //   Alert(context: context, title: "Login Gagal", type: AlertType.error)
+  //       .show();
+  // }
+  //   }
+  // }
 }

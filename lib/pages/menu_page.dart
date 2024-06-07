@@ -32,8 +32,10 @@ class MenuPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      KonfirmasiPesananPage(selectedProduct: products[index]),
+                  builder: (context) => KonfirmasiPesananPage(
+                    selectedProduct: products[index],
+                    onAddToCart: onAddToCart, // Pastikan untuk menambahkan ini
+                  ),
                 ),
               );
             },

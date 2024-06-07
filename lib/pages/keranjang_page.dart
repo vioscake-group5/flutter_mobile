@@ -98,7 +98,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
           ),
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFFDEAE78),
-            foregroundColor: Colors.white, // Background color
+            foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10), // Rounded corners
             ),
