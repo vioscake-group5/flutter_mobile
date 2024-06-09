@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:vioscake_admin/pages/login_page.dart';
 import 'package:vioscake_admin/shared/shared.dart';
@@ -11,19 +13,28 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     // text controller
+    TextEditingController txtName = TextEditingController();
     TextEditingController txtEmail = TextEditingController();
     TextEditingController txtPassword = TextEditingController();
     TextEditingController txtPasswordConfirm = TextEditingController();
 
-    // make login
-    Future<void> register(BuildContext context, String email, String password, String password_confirmation) async {
+    // make register
+    Future<void> register(BuildContext context, String name, String email, String password, String password_confirmation) async {
+      final url = Uri.parse('https://vioscake.my.id/api/register');
+      final headers = {
+        'Content-Type' : 'application/json',
+        'User' : 'Mobile'
+      };
+      final body = jsonEncode({
+        'name': name,
+        'email': email,
+        'password': password,
+        'password_confirmation': password_confirmation,
+      });
       final response = await http.post(
-        Uri.parse('http://192.168.1.5:8000/api/register'), // ganti make url API serah
-        body: {
-          'email': email,
-          'password': password,
-          'password_confirmation': password_confirmation,
-        },
+        url,
+        headers: headers,
+        body: body
       );
       if (response.statusCode == 201) {
         Navigator.push(
@@ -116,6 +127,22 @@ class SignUpPage extends StatelessWidget {
                       horizontal: 10.0,
                     ),
                     child: TextField(
+                      controller: txtName,
+                      decoration: InputDecoration(
+                        labelText: 'Name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 10.0,
+                    ),
+                    child: TextField(
                       controller: txtEmail,
                       decoration: InputDecoration(
                         labelText: 'Email',
@@ -168,7 +195,7 @@ class SignUpPage extends StatelessWidget {
                         //   context,
                         //   MaterialPageRoute(builder: (context) => LoginPage()),
                         // );
-                        register(context, txtEmail.text, txtPassword.text, txtPasswordConfirm.text);
+                        register(context, txtName.text, txtEmail.text, txtPassword.text, txtPasswordConfirm.text);
                       },
                       style: ButtonStyle(
                         backgroundColor: WidgetStateProperty.all<Color>(
