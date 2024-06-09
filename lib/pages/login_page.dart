@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:vioscake_admin/pages/forgot_password.dart';
 import 'package:vioscake_admin/pages/landing_page.dart';
@@ -18,23 +19,29 @@ class LoginPage extends StatelessWidget {
 
     // make login
     Future<void> login(BuildContext context, String email, String password) async {
+      final url = Uri.parse('https://vioscake.my.id/api/login');
+      final headers = {
+        'Content-Type' : 'application/json',
+        'User' : 'Mobile'
+      };
+      final body = jsonEncode({
+        'email' : email,
+        'password' : password
+      });
       final response = await http.post(
-        Uri.parse('http://192.168.1.5:8000/api/login2'), // ganti make url API serah
-        body: {
-          'email': email,
-          'password': password,
-        },
+        url,
+        headers: headers,
+        body: body,
       );
-
       if (response.statusCode == 200) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => LandingPage()),
         );
       } else {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Error'),
               content: Text('Failed to login. Please try again.'),
