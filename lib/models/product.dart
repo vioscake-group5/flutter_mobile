@@ -16,22 +16,45 @@ class Product {
 
 List<Product> products = [
   Product(
-    name: 'Red Valvet Cake',
-    description: 'Deskripsi Produk 1',
-    price: 10000,
-    image: 'https://via.placeholder.com/150',
+    name: 'Red Velvet Cake',
+    description: 'Base cake dengan rasa red velvet',
+    price: 45000,
+    image: 'assets/base_cake/red_valvet.png',
   ),
   Product(
     name: 'Matcha Cake',
-    description: 'Deskripsi Produk 2',
-    price: 20000,
-    image: 'https://via.placeholder.com/150',
+    description: 'Base cake dengan rasa matcha asli',
+    price: 45000,
+    image: 'assets/base_cake/matcha.png',
+  ),
+  Product(
+    name: 'Chocolate Cake',
+    description: 'Base cake dengan coklat yang melimpah',
+    price: 45000,
+    image: 'assets/base_cake/chocolate.png',
+  ),
+  Product(
+    name: 'Cheese Cake',
+    description: 'Base cake yang lembut dengan cita rasa keju',
+    price: 45000,
+    image: 'assets/base_cake/cheese.png',
   ),
   Product(
     name: 'Black Forest Cake',
-    description: 'Deskripsi Produk 3',
-    price: 35000,
-    image: 'https://via.placeholder.com/150',
+    description: 'Base cake dengan coklat dan cherry',
+    price: 45000,
+    image: 'assets/base_cake/black_forest.png',
   ),
-  // Add more products here
+  Product(
+    name: 'Pandan Cake',
+    description: 'Base cake dengan aroma pandan',
+    price: 45000,
+    image: 'assets/base_cake/pandan.png',
+  ),
+  Product(
+    name: 'Brownies',
+    description: 'Base cake brownies',
+    price: 45000,
+    image: 'assets/base_cake/brownies.png',
+  ),
 ];
