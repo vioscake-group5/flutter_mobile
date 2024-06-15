@@ -30,6 +30,7 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
   String deliveryAddress = 'Jl. Samanhudi / III No. 51';
   int? selectedDesignIndex;
   bool isDesignSelectable = true;
+  DateTime? selectedDate;
 
   @override
   void initState() {
@@ -85,6 +86,20 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
           );
         },
       );
+    }
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
     }
   }
 
@@ -212,6 +227,24 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
                     },
                   );
                 }),
+              ),
+              SizedBox(height: 16),
+              Text('Tanggal Pesanan'),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      selectedDate == null
+                          ? 'Pilih Tanggal'
+                          : "${selectedDate!.toLocal()}".split(' ')[0],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _selectDate(context),
+                    child: Text('Pilih Tanggal'),
+                  ),
+                ],
               ),
               SizedBox(height: 16),
               Text('Request (*jika diisi akan menambah total harga)'),
