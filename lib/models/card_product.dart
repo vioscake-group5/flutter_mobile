@@ -18,8 +18,7 @@ class ProductCard extends StatelessWidget {
         NumberFormat.currency(locale: 'id_ID', symbol: 'Rp', decimalDigits: 0);
 
     return Container(
-      margin: EdgeInsets.only(bottom: 16.0),
-      padding: EdgeInsets.all(16.0),
+      margin: EdgeInsets.only(bottom: 16.0, top: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
       ),

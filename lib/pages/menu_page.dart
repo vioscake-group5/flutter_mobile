@@ -14,29 +14,21 @@ class MenuPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        toolbarHeight: 128,
         title: Text(
           'Menu',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: Color(0xFFDEAE78),
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.chat_bubble_outline, color: Colors.black),
-            onPressed: () {
-              // Aksi ketika tombol keranjang ditekan
-            },
-          ),
-        ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           children: [
             TextField(
@@ -50,7 +42,6 @@ class MenuPage extends StatelessWidget {
                 fillColor: Colors.grey[200],
               ),
             ),
-            SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
                 itemCount: products.length,
