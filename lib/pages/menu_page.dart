@@ -42,6 +42,7 @@ class MenuPage extends StatelessWidget {
                 fillColor: Colors.grey[200],
               ),
             ),
+            SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 itemCount: products.length,
