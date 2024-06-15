@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:vioscake_admin/pages/forgot_password.dart';
 import 'package:vioscake_admin/pages/landing_page.dart';
 import 'package:vioscake_admin/pages/register_page.dart';
@@ -6,8 +7,16 @@ import 'package:vioscake_admin/shared/shared.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController txtEmail = TextEditingController();
+  TextEditingController txtPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +83,7 @@ class LoginPage extends StatelessWidget {
                     horizontal: 10.0,
                   ), // Atur padding sesuai kebutuhan Anda
                   child: TextField(
-                    controller: txtEmail,
+                    // controller: txtEmail,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(
@@ -90,7 +99,7 @@ class LoginPage extends StatelessWidget {
                     horizontal: 10.0,
                   ),
                   child: TextField(
-                    controller: txtPassword,
+                    // controller: txtPassword,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(
@@ -128,11 +137,11 @@ class LoginPage extends StatelessWidget {
                   child: ElevatedButton(
                     // this._doLogin();
                     onPressed: () {
-                      this._doLogin();
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => LandingPage()),
-                      // );
+                      // this._doLogin();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LandingPage()),
+                      );
                     },
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all<Color>(
@@ -178,15 +187,16 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  // Future _doLogin() async {
-  //   if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
-  //     Alert(
-  //             context: context,
-  //             title: "Email atau password salah!",
-  //             type: AlertType.error)
-  //         .show();
-  //     return;
-  // }
+  Future _doLogin() async {
+    if (txtEmail.text.isEmpty || txtPassword.text.isEmpty) {
+      Alert(
+              context: context,
+              title: "Email atau password salah!",
+              type: AlertType.error)
+          .show();
+      return;
+    }
+  }
   // final response = await http.post('https://vioscake.my.id/',
   //     body: {'email': txtEmail.text, 'password': txtPassword.text},
   //     headers: {'Accept': 'application/json'});

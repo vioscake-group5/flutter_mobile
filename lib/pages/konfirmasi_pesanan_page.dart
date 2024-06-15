@@ -182,11 +182,8 @@ class _KonfirmasiPesananPageState extends State<KonfirmasiPesananPage> {
                         : null,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: selectedDesignIndex == index
-                            ? Colors.blue
-                            : Colors.grey[300],
                         border: selectedDesignIndex == index
-                            ? Border.all(color: Colors.blue, width: 2)
+                            ? Border.all(color: Color(0xFFEFD7AE), width: 1)
                             : null,
                       ),
                       child: Center(

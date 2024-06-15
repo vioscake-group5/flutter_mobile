@@ -27,7 +27,7 @@ class _LandingPageState extends State<LandingPage> {
         onAddToCart: (product) => tambahKeKeranjang(product),
       ),
       new KeranjangPage(keranjangItems: keranjangItems),
-      new SettingPage(),
+      // new SettingPage(),
     ];
   }
 

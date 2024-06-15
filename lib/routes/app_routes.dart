@@ -42,7 +42,7 @@ class AppRoutes {
     // forgotPasswordScreen: (context) => ForgotPasswordScreen(),
     // appNavigationScreen: (context) => AppNavigationScreen(),
 
-    settingScreen: (context) => SettingPage(),
+    // settingScreen: (context) => SettingPage(),
     chatAdminScreen: (context) => ChatPage(),
     daftarTransaksiScreen: (context) => DaftarTransaksiScreen(),
     signInOneScreen: (context) => SignUpPage(),

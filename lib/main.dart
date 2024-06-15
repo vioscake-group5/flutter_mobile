@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         '/landing_page': (context) => LandingPage(),
         '/login': (context) => LoginPage(),
         '/welcome': (context) => WelcomePage(),
-        '/settings': (context) => SettingPage(),
+        // '/settings': (context) => SettingPage(),
       },
     );
   }

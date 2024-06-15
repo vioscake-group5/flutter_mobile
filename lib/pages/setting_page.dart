@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 import '../../theme/custom_button_style.dart';
 import '../../widgets/custom_elevated_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -11,8 +12,6 @@ class SettingPage extends StatelessWidget {
     await prefs.setBool('isLoggedIn', false);
     Navigator.pushReplacementNamed(context, '/login');
   }
-
-  const SettingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class SettingPage extends StatelessWidget {
               _buildSettingsColumn(context),
               SizedBox(height: 10.v),
               _buildTelevisionColumn(context),
-              SizedBox(height: 5.v)
+              SizedBox(height: 5)
             ],
           ),
         ),

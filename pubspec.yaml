@@ -25,6 +25,7 @@ dependencies:
   http: ^1.2.1
   progress_dialog_null_safe: ^3.0.0
   image_picker: ^1.1.1
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -49,11 +50,20 @@ flutter:
     - assets/images/
   #   - images/a_dot_burr.jpeg
     - assets/logo.png
+    
     - assets/icon/home.png
     - assets/icon/menu.png
     - assets/icon/keranjang.png
     - assets/icon/setting.png
     - assets/icon/chat.png
+    
+    - assets/base_cake/black_forest.png
+    - assets/base_cake/brownies.png
+    - assets/base_cake/cheese.png
+    - assets/base_cake/chocolate.png
+    - assets/base_cake/matcha.png
+    - assets/base_cake/pandan.png
+    - assets/base_cake/red_valvet.png
   fonts:
     - family: Poppins
       fonts:

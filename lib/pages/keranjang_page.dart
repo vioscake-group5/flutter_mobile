@@ -100,7 +100,7 @@ class _KeranjangPageState extends State<KeranjangPage> {
             backgroundColor: Color(0xFFDEAE78),
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10), // Rounded corners
+              borderRadius: BorderRadius.circular(7), // Rounded corners
             ),
           ),
         ),
