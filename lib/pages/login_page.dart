@@ -34,6 +34,15 @@ class LoginPage extends StatelessWidget {
         body: body,
       );
       if (response.statusCode == 200) {
+        
+        final responseData = json.decode(response.body);
+        final token = responseData['token'];
+        // Save token to SharedPreferences
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', token);
+        // Tampilkan token pada log
+        // print('Token berhasil disimpan: $token');
+        
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => LandingPage()),
